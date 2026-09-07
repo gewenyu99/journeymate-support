@@ -1,0 +1,108 @@
+name: Publish support and privacy pages
+
+# Manual only: editing/pushing the app or these drafts never publishes a site.
+# The app repository is private. For $0 GitHub Pages, copy this workflow and
+# only docs/appstore/site/{HTML,CSS,assets,reference-data} to a separate public site-only repo.
+# Preserve that source path. Do not change the app repository's visibility;
+# private-repository Pages availability depends on the owner's GitHub plan.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: support-pages
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+      - name: Reject placeholders and stage only public site files
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          import json
+          import re
+          import shutil
+
+          source = Path('docs/appstore/site')
+          destination = Path('_support_site')
+          publish_files = ['index.html', 'support.html', 'privacy.html', 'styles.css']
+          for name in publish_files:
+              text = (source / name).read_text()
+              if re.search(r'NEEDS_INPUT|\{\{|publication draft', text, re.IGNORECASE):
+                  raise SystemExit(f'{name} still contains draft fields. Complete the public pages before publishing.')
+          destination.mkdir()
+          for name in publish_files:
+              shutil.copyfile(source / name, destination / name)
+          shutil.copytree(source / 'assets', destination / 'assets')
+          print('Only support/privacy HTML, CSS, and local assets staged.')
+          # Optional Pull latest endpoint. Copy only an exported package and
+          # its QA-qualified receipt, never raw maintenance snapshots or code.
+          references = source / 'reference-data'
+          if references.exists():
+              package_path = references / 'latest.json'
+              receipt_path = references / 'latest.receipt.json'
+              if any(path.is_symlink() for path in (references, package_path, receipt_path)):
+                  raise SystemExit('Reference publication must not follow symlinks.')
+              if package_path.stat().st_size > 4 * 1024 * 1024 or receipt_path.stat().st_size > 16384:
+                  raise SystemExit('Reference package/receipt exceeds publication limits.')
+              body = package_path.read_bytes()
+              package = json.loads(body)
+              receipt = json.loads(receipt_path.read_bytes())
+              qa = receipt.get('qa', {})
+              if (receipt.get('requireQA') is not True or qa.get('status') != 'passed' or
+                  qa.get('profile') not in ('phone', 'release') or receipt.get('offlineIntegrity') != 'passed' or
+                  not re.fullmatch(r'[0-9a-f]{64}', receipt.get('sourceFingerprint', '')) or
+                  qa.get('sourceFingerprint') != receipt.get('sourceFingerprint') or
+                  receipt.get('sha256') != hashlib.sha256(body).hexdigest() or
+                  receipt.get('bytes') != len(body) or receipt.get('file') != 'latest.json'):
+                  raise SystemExit('Reference publication requires a matching QA-qualified export receipt.')
+              names = {'manifest.json', 'countries.json', 'embassies.json', 'phrases.json'}
+              if (type(package.get('formatVersion')) is not int or package['formatVersion'] != 1 or
+                  set(package.get('files', {})) != names or
+                  package.get('generatedAt') != receipt.get('generatedAt')):
+                  raise SystemExit('Reference envelope contract does not match the receipt.')
+              files = package['files']
+              manifest = json.loads(files['manifest.json'])
+              statics = [row for row in manifest['datasets'] if row['kind'] == 'static']
+              if len(statics) != 3 or {row['id'] for row in statics} != {'countries', 'embassies', 'phrases'}:
+                  raise SystemExit('Unexpected reference datasets.')
+              for row in statics:
+                  if (row['file'] != row['id'] + '.json' or
+                      hashlib.sha256(files[row['file']].encode('utf-8')).hexdigest() != row['sha256']):
+                      raise SystemExit('Reference content hash mismatch.')
+              (destination / 'reference-data').mkdir()
+              for path in (package_path, receipt_path):
+                  shutil.copyfile(path, destination / 'reference-data' / path.name)
+              print('Matching static reference export and QA receipt staged.')
+          PY
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Upload public site artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _support_site
+
+  deploy:
+    needs: prepare
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

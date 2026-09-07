@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-labelledby="title description">
+  <title id="title">JourneyMate — companions on a journey</title>
+  <desc id="description">Two white companions above a navy hill, a winding ivory path, and a golden sunset beneath a violet sky.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#432C83"/>
+      <stop offset="0.25" stop-color="#812B83"/>
+      <stop offset="0.47" stop-color="#CD356C"/>
+      <stop offset="0.70" stop-color="#FC6D48"/>
+      <stop offset="1" stop-color="#FFAC4C"/>
+    </linearGradient>
+    <radialGradient id="sunsetGlow" cx="0.55" cy="0.77" r="0.59" gradientTransform="translate(0 -0.09) scale(1 1.12)">
+      <stop offset="0" stop-color="#FFEBA0" stop-opacity="0.98"/>
+      <stop offset="0.29" stop-color="#FFC954" stop-opacity="0.90"/>
+      <stop offset="0.62" stop-color="#FF9441" stop-opacity="0.42"/>
+      <stop offset="1" stop-color="#F15E50" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="sun" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFF5C5"/>
+      <stop offset="1" stop-color="#FFE578"/>
+    </linearGradient>
+    <linearGradient id="companions" x1="0" y1="0" x2="0.20" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="0.65" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#FFFBE9"/>
+    </linearGradient>
+    <linearGradient id="hill" x1="0.45" y1="0" x2="0.60" y2="1">
+      <stop offset="0" stop-color="#193469"/>
+      <stop offset="0.52" stop-color="#0B2451"/>
+      <stop offset="1" stop-color="#04183D"/>
+    </linearGradient>
+    <radialGradient id="hillLight" cx="0.52" cy="0" r="0.96">
+      <stop offset="0" stop-color="#29477F" stop-opacity="0.26"/>
+      <stop offset="1" stop-color="#041631" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="path" x1="0.28" y1="0" x2="0.72" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="0.33" stop-color="#FFFCED"/>
+      <stop offset="0.59" stop-color="#F8EED6"/>
+      <stop offset="1" stop-color="#DAD1D5"/>
+    </linearGradient>
+    <clipPath id="canvas"><rect width="1024" height="1024"/></clipPath>
+  </defs>
+  <g clip-path="url(#canvas)">
+    <rect width="1024" height="1024" fill="url(#sky)"/>
+    <rect width="1024" height="820" fill="url(#sunsetGlow)"/>
+    <g fill="#FFBEAD">
+      <path opacity="0.30" d="M704 280 C725 272 732 269 741 271 C751 259 766 257 780 263 C787 239 812 224 846 239 C854 210 876 197 900 197 C928 197 950 216 957 244 C975 230 995 241 1001 257 C1012 253 1019 261 1020 269 L1044 280Z"/>
+      <path opacity="0.39" d="M-15 432 L-3 423 C5 421 9 418 15 417 C26 412 36 413 47 416 C54 397 71 389 91 399 C96 375 114 359 137 359 C162 359 181 376 187 399 C207 384 231 395 236 418 C248 413 263 417 269 424 C280 422 293 429 305 432Z"/>
+      <path opacity="0.17" d="M-10 522 L-10 504 C0 489 15 487 33 493 L49 489 C71 477 90 487 101 503 C109 496 119 499 125 506 C150 501 168 511 199 522Z"/>
+      <path opacity="0.20" d="M871 524 C894 509 914 508 934 503 C945 485 962 485 974 477 C995 466 1009 479 1028 504 L1034 524Z"/>
+    </g>
+    <circle cx="797" cy="517" r="95" fill="url(#sun)"/>
+    <g fill="url(#companions)">
+      <circle cx="448" cy="247" r="57"/>
+      <path d="M365 550V395 C365 349 402 315 448 315 C494 315 529 350 529 395V550Z"/>
+      <circle cx="574" cy="311" r="42"/>
+      <path d="M544 550V407 C544 396 543 382 540 371 C550 365 562 362 574 362 C610 362 638 389 638 426V550Z"/>
+    </g>
+    <path d="M0 648 C153 560 326 522 497 526 C690 520 874 560 1024 640V1024H0Z" fill="url(#hill)"/>
+    <path d="M0 648 C153 560 326 522 497 526 C690 520 874 560 1024 640V1024H0Z" fill="url(#hillLight)"/>
+    <path d="M405 535 C490 541 655 555 675 602 C702 659 491 682 468 730 C432 795 669 807 756 902 C813 962 817 999 802 1024H471 C510 982 501 951 478 927 C422 869 265 847 263 778 C256 707 448 672 529 639 C630 599 582 570 405 535Z" fill="url(#path)"/>
+  </g>
+</svg>
