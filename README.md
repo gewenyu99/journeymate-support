@@ -8,7 +8,9 @@ GitHub Pages deployment workflow.
 
 Created 2026-09-07. The website is **not deployed**. The source pages contain
 clearly marked draft fields; the deployment workflow rejects those fields.
-Repository creation and commits do not publish the website.
+Repository creation and commits do not publish the website. GitHub Pages is
+configured to use **GitHub Actions**, with HTTPS enforced; there is no live
+deployment yet.
 
 | Item | Status |
 | --- | --- |
@@ -50,8 +52,8 @@ Open `http://127.0.0.1:8000/`. This is a local preview, not a public deployment.
    index identical. Use relative links between support and privacy pages.
 4. The agent checks local navigation, phone layouts, keyboard access and light
    and dark appearance. Fix failures; do not assign manual testing to the owner.
-5. Commit and push to `main`. In repository Settings → Pages, the build source
-   must be **GitHub Actions**. Run **Publish support and privacy pages** from
+5. Commit and push to `main`. Repository Settings → Pages is already configured
+   to use **GitHub Actions**. Run **Publish support and privacy pages** from
    Actions, or use:
 
    ```sh
@@ -71,6 +73,17 @@ Expected Pages addresses, **not live until deployment succeeds**:
 GitHub Pages is available for public repositories on GitHub Free. No custom
 domain or paid hosting plan is required for this setup. Hosting availability
 and limits follow [GitHub's Pages documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages).
+
+## Setup validation · 2026-09-07
+
+The agent checked the exact nine-file public repository allowlist, copied-file
+hashes, identical support/index pages, local HTML navigation/assets and SVG
+contents. No private source history, contacts or credentials were copied.
+The actual workflow staging command was executed in a temporary directory:
+current drafts were rejected before output creation; a disposable completed
+fixture staged exactly the five intended site files and excluded an unrelated
+file. The trigger is manual-only. No deployment or new visual QA is claimed by
+these setup checks; page layout and styling were copied unchanged.
 
 ## Optional static reference downloads
 
