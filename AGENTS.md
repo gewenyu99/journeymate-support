@@ -6,8 +6,9 @@ publication status, owner fields and the deployment command.
 - Keep this repository limited to public support/privacy HTML, styles, artwork,
   public maintenance instructions and the Pages workflow. Never copy app source
   history, signing material, secrets or private App Review contact details.
-- Keep unknown identity, email and retention fields marked. The owner explicitly
-  deferred these inputs; they are not manual-testing tasks. Do not invent them.
+- The owner supplied public operator/copyright name Vincent Ge and public
+  email vge2606@gmail.com. Keep the published policy and actual handling aligned;
+  do not invent future identity, contact or data-retention changes.
 - Maintain index.html and support.html as identical pages. Use relative site
   links so the GitHub Pages project path works.
 - The agent owns testing and fixes. Check local links and headless phone renders
