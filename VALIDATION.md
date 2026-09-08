@@ -47,3 +47,11 @@ Payload SHA-256:
 `b8f3d83b0fec13d8fc88498237905acb7f81d8f565abd2641b219ff3898c9e42`.
 Qualified source fingerprint:
 `18ab8185d21c731c3f54a7d22ffce6b8b23112a36d314da0de7a1dae0e45fd86`.
+
+### Live reference endpoint — published
+
+[Deployment 34173036704](https://github.com/gewenyu99/journeymate-support/actions/runs/34173036704)
+succeeded from site commit `e22b888`. At **2026-09-08T00:23:19.714027+00:00**, both
+reference JSON files returned anonymous direct **HTTP 200**, correct JSON content
+types, no redirects, and exact local payload/receipt hashes. The payload is
+87,822 bytes. This is publication/identity verification, not additional app QA.
