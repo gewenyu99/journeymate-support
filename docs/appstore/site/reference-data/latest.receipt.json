@@ -1,0 +1,17 @@
+{
+  "bytes": 87822,
+  "file": "latest.json",
+  "formatVersion": 1,
+  "generatedAt": "2026-09-07T05:39:41Z",
+  "meaning": "Structural integrity and QA evidence only; no independent factual verification or publication.",
+  "offlineIntegrity": "passed",
+  "qa": {
+    "profile": "phone",
+    "receiptSHA256": "24aba13f06ea379a79310fdec54aadc3566aa9728c8a6e142e5a8b1e11f34305",
+    "sourceFingerprint": "18ab8185d21c731c3f54a7d22ffce6b8b23112a36d314da0de7a1dae0e45fd86",
+    "status": "passed"
+  },
+  "requireQA": true,
+  "sha256": "b8f3d83b0fec13d8fc88498237905acb7f81d8f565abd2641b219ff3898c9e42",
+  "sourceFingerprint": "18ab8185d21c731c3f54a7d22ffce6b8b23112a36d314da0de7a1dae0e45fd86"
+}
