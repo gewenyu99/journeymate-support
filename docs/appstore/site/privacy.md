@@ -1,6 +1,6 @@
 # JourneyMate privacy policy
 
-This policy describes JourneyMate releases with product analytics and crash reporting enabled.
+This policy describes JourneyMate releases with product analytics enabled and configurable crash reporting.
 
 Effective date: **September 7, 2026**
 Operator: **Vincent Ge**
@@ -8,7 +8,7 @@ Privacy contact: **[vge2606@gmail.com](mailto:vge2606@gmail.com)**
 
 JourneyMate is an experimental travel information app. It does not require a
 JourneyMate account. Preferences are stored locally, while maps, place search,
-weather, official advisories, product analytics, and crash reporting use online services as described below.
+weather, official advisories, product analytics, and crash reporting when enabled use online services as described below.
 
 ## Information stored on your device
 
@@ -16,7 +16,7 @@ JourneyMate stores your selected country, home nationality, travel mode,
 location preference, welcome-flow status, and related app preferences using local
 storage. It also stores source-fetch timestamps, any reference data you choose
 to download, and update-attempt/download timestamps, and may use system network
-caches. The analytics SDK stores installation/session identifiers and queued events or crash reports locally before transmission. This version does not provide an account or cloud preference sync.
+caches. The analytics SDK stores installation/session identifiers and queued events locally before transmission; crash reports may also be stored when that collection is enabled. This version does not provide an account or cloud preference sync.
 
 You can change your choices in Settings. Deleting the app removes its local app
 data; device backups and any information you shared outside the app are managed
@@ -79,11 +79,16 @@ website providers apply their own processing and retention policies.
 
 ## Analytics and diagnostics
 
-JourneyMate sends its existing feature-use events and automatic crash reports to
-PostHog Cloud in the United States at `https://us.i.posthog.com`. Collection
-starts when this release launches. We use feature-use information to understand
-which parts of JourneyMate are used and improve the app, and diagnostics to
-investigate crashes and technical problems.
+JourneyMate sends its existing feature-use events to PostHog Cloud in the
+United States at `https://us.i.posthog.com`. Usage collection starts when this
+release launches. We use this information to understand which parts of
+JourneyMate are used and improve the app.
+
+The app also includes automatic crash-reporting capability. It requires the
+PostHog project's crash-autocapture setting to be enabled. That project setting
+is currently off, so automatic crash collection is inactive while usage
+analytics remains enabled. If crash collection is enabled, we use those reports
+to investigate crashes and technical problems, as described below.
 
 Feature-use events record actions such as opening Quick info, choosing a tool
 or service category, opening a telephone prompt, viewing or playing a bundled
@@ -98,10 +103,11 @@ The SDK assigns a random installation identifier and session identifiers, which
 can link events and diagnostics from the same installation. These identifiers
 are not your name or email, but the records are not fully anonymous. JourneyMate
 has no account login and does not create PostHog person profiles or join these
-records to your support email. Crash reports include technical exception types,
-stack traces, and diagnostic context; crash free-text messages and recent-action
-breadcrumbs are removed before transmission. Reports may be queued on the device
-and sent later, including after the next launch.
+records to your support email. When crash collection is enabled, reports include
+technical exception types, stack traces, and diagnostic context; crash free-text
+messages and recent-action breadcrumbs are removed before transmission. Those
+reports may be queued on the device and sent later, including after the next
+launch.
 
 Session replay, automatic screen and interaction recording, automatic lifecycle
 events, surveys, push-notification capture, and feature-flag event capture are
